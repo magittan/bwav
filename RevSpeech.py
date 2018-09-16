@@ -1,10 +1,10 @@
 import requests
 import json
 import time
+import summarizer
 
 API_KEY = "Bearer 01jS3bvO2rL7OS0_GRmF-Z7h77p1Cp1RF_3se_E5_9brna0XdVV8_prQjeut-2HOEIG1WzFQLrwfJ5Q9bjHXiL66bkVEg"
 HEADERS = {'Authorization': API_KEY}
-
 def submit_job_url(media_url):
     url = "https://api.rev.ai/revspeech/v1beta/jobs"
     payload = {'media_url': media_url,
@@ -48,14 +48,14 @@ def get_transcript(id='59594172'):
         raise
 
     response_body = request.json()
-    parse(response_body)
+    response_body = parse(response_body)
     return response_body
 
 def parse(response_body):
     stringReader = []
     for element in response_body['monologues'][0]['elements']:
         stringReader += element['value']
-    print(''.join(stringReader))
+    return ''.join(stringReader)
 
 def test_workflow_with_url(url):
     print ("Submitting job with URL")
@@ -101,11 +101,14 @@ def test_workflow_with_file(file):
 def main():
     # Testing with URL
     media_url = "https://support.rev.com/hc/en-us/article_attachments/200043975/FTC_Sample_1_-_Single.mp3"
-    test_workflow_with_url(media_url)
+    string = test_workflow_with_url(media_url)
 
     # Testing with file upload
     # file = "test.mp3"
     # test_workflow_with_file(file)
+
+    s = summarizer.Summarizer()
+    
 
 if __name__ == "__main__":
     main()
