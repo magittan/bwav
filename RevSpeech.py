@@ -108,6 +108,7 @@ def main():
     # test_workflow_with_file(file)
 
     s = summarizer.Summarizer()
+    print(s.get_summary(string))
     
 
 if __name__ == "__main__":

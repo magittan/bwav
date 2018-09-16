@@ -9,4 +9,4 @@ class Summarizer:
         algo = client.algo('nlp/Summarizer/0.1.8')
 
     def get_summary(self, input):
-        return algo.pipe(input).result
+        return self.algo.pipe(input).result
