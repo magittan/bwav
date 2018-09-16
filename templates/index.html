@@ -3,7 +3,7 @@
 
 {% block head %}
 {{ super() }}
-  <title>SODA</title>
+  <title>BWAVE</title>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="index.css">
   <link rel="manifest" href="/manifest.json">
@@ -13,7 +13,7 @@
 
 {% block navbar %}
     <div class="navbar navbar-inverse" role="navigation">
-      <a class="navbar-brand" href="#">DWAVE</a>
+      <a class="navbar-brand" href="#">BWAVE</a>
         <div class="container">
             <div class="navbar_header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -34,6 +34,27 @@
 {% endblock %}
 
 {% block content %}
-<body background="/static/cool-background.png" style="background-size:cover">
+<body background="/static/cool-background.png" style="background-size:cover;background-repeat: no-repeat;background-size: 100% 200%;">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-md-offset-4">
+        <h1 style="text-align: center;">BWAVE</h1>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <form method=POST action="{{ url_for('index') }}">
+                <div class="form-group">
+                    <label for="exampleSearch">Search</label>
+                    <input type="search" class="form-control" name="pass" placeholder="Search">
+                </div>
+                <button type="submit" class="btn btn-primary btn-block">Search</button>
+            </form>
+            <br>
+        </div>
+    </div>
+</div>
 </body>
 {% endblock %}
