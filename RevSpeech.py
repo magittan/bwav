@@ -1,7 +1,7 @@
 import requests
 import json
 import time
-import summarizer
+import Algorithmia
 
 API_KEY = "Bearer 01jS3bvO2rL7OS0_GRmF-Z7h77p1Cp1RF_3se_E5_9brna0XdVV8_prQjeut-2HOEIG1WzFQLrwfJ5Q9bjHXiL66bkVEg"
 HEADERS = {'Authorization': API_KEY}
@@ -101,14 +101,15 @@ def test_workflow_with_file(file):
 def main():
     # Testing with URL
     media_url = "https://support.rev.com/hc/en-us/article_attachments/200043975/FTC_Sample_1_-_Single.mp3"
-    string = test_workflow_with_url(media_url)
+    Sstring = test_workflow_with_url(media_url)
 
     # Testing with file upload
     # file = "test.mp3"
     # test_workflow_with_file(file)
 
-    s = summarizer.Summarizer()
-    print(s.get_summary(string))
+    client = Algorithmia.client('simVeHMWvc1HegdwTNkpem+O/fs1')
+    algo = client.algo('nlp/Summarizer/0.1.8')
+    print(algo.pipe(Sstring).result)
     
 
 if __name__ == "__main__":
