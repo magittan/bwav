@@ -48,8 +48,14 @@ def get_transcript(id='59594172'):
         raise
 
     response_body = request.json()
-    print("response", response_body)
+    parse(response_body)
     return response_body
+
+def parse(response_body):
+    stringReader = []
+    for element in response_body['monologues'][0]['elements']:
+        stringReader += element['value']
+    print(''.join(stringReader))
 
 def test_workflow_with_url(url):
     print ("Submitting job with URL")
