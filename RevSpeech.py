@@ -20,8 +20,10 @@ def submit_job_url(media_url):
 def submit_job_file(file):
     url = "https://api.rev.ai/revspeech/v1beta/jobs"
     files = { 'media': (file, open(file, 'rb'), 'audio/mp3') }
+    print(files)
     request = requests.post(url, headers=HEADERS, files=files)
     if request.status_code != 200:
+        print(request.status_code)
         raise
 
     response_body = request.json()
@@ -93,19 +95,19 @@ def test_workflow_with_file(file):
         if status == "failed":
             raise
 
-        print ("Trying in another 30 seconds")
-        time.sleep(30)
+        print ("Trying in another 10 seconds")
+        time.sleep(10)
 
     return get_transcript(id)
 
 def main():
     # Testing with URL
-    media_url = "https://support.rev.com/hc/en-us/article_attachments/200043975/FTC_Sample_1_-_Single.mp3"
-    Sstring = test_workflow_with_url(media_url)
+    # media_url = "https://support.rev.com/hc/en-us/article_attachments/200043975/FTC_Sample_1_-_Single.mp3"
+    # Sstring = test_workflow_with_url(media_url)
 
     # Testing with file upload
-    # file = "test.mp3"
-    # test_workflow_with_file(file)
+    file = "../../Downloads/FTC Sample 1 - Single.mp3"
+    test_workflow_with_file(file)
 
     client = Algorithmia.client('simVeHMWvc1HegdwTNkpem+O/fs1')
     algo = client.algo('nlp/Summarizer/0.1.8')
